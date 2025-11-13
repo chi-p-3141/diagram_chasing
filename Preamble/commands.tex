@@ -1,0 +1,86 @@
+%% MACROS
+% math hyphen
+\mathchardef\mhyphen="2D
+
+% complexity fonts
+\let\prob\lang
+\newcommand{\thprob}[1]{\emph{\textsc{#1}}}
+\newclass{\LCL}{LCL}
+
+% delimiters
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\newcommand{\MSet}[1]{\Set{\!\Set{#1}\!}}
+\newcommand{\dv}{\,\middle|\,}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\let\card\abs
+%\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\tuple}{\langle}{\rangle}
+%\let\scal\tuple
+
+% math letters
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Pow}{\mathcal{P}} %exception for readability: powerset/part set
+\newcommand{\frCl}{\mathfrak{Cl}}
+
+% shortcuts
+\newcommand{\airquotes}[1]{``#1''}
+\newcommand{\uin}{_{\text{in}}}
+\newcommand{\uout}{_{\text{out}}}
+\newcommand{\into}{\hookrightarrow}
+
+
+%% FORMAT
+% page format
+\geometry{a4paper, total={170mm,257mm}, left=15mm, top=20mm}
+
+% table format
+\renewcommand{\arraystretch}{1.25}
+
+% theorem format
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{obs}{Observation}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+% link format
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+% references format
+\Crefname{thm}{Theorem}{Theorems}
+\Crefname{cor}{Corollary}{Corollaries}
+\newcommand{\myref}[1]{[\Cref{#1}]}
+
+% complexity/amsthm (italics) interaction "fix"
+\renewcommand{\lang}[1]{\textsc{#1}}
+\newcommand{\langthm}[1]{\emph{\textsc{#1}}}
+
+% parskip/amsthm interaction "fix"
+\makeatletter
+    \@for\theoremstyle:=definition,remark,plain\do{%
+        \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+            \addtolength\thm@preskip\parskip
+            }%
+        }
+\makeatother
+\AtBeginEnvironment{proof}{\vspace{-\parskip}}
